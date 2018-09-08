@@ -1,0 +1,32 @@
+{
+  "name": "backyard-watering",
+  "version": "0.0.2",
+  "description": "My DIY backyard smart-watering project",
+  "main": "backyard.js",
+  "scripts": {
+    "test": "echo \"No test specified.\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trguenther/backyard-watering.git"
+  },
+  "keywords": [
+    "IoT",
+    "smart-watering",
+    "mcp-spi-adc"
+  ],
+  "author": {
+    "name": "Tim Guenther",
+    "email": "timguenther@gmail.com",
+    "url": "https://twitter.com/timissupertall"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/trguenther/backyard-watering/issues"
+  },
+  "homepage": "https://github.com/trguenther/backyard-watering#readme",
+  "dependencies": {
+    "mcp-spi-adc": "^2.0.3",
+    "pigpio": "^1.1.2"
+  }
+}
