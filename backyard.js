@@ -102,6 +102,6 @@ console.log("Interval: 3 seconds\r\n");
 
 setInterval(function() {
     // avg = (m1 + m2 + m3 + m4 + m5) / 5; // Average of all five sensors
-    avg = (m1 + m2 + m4 + m5) / 5;
+    avg = (m1 + m2 + m4 + m5) / 4;
     console.log("Ambient temperature: " + t1 + " F\nAverage soil moisture reading: " + avg.toFixed(3) + "V\r\n");
 }, 3000);
