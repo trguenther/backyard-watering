@@ -9,6 +9,8 @@ var t1  = 0.0,
     m5  = 0.0,
     avg = 0.0;
 
+console.log("Initializing...");
+
 var tempSensor = mcpadc.open(0, {speedHz: 20000}, function (err) {
     if (err) throw err;
 
@@ -34,7 +36,7 @@ var moistureSensor1 = mcpadc.open(1, {speedHz: 20000}, function (err) {
             var voltage = reading.value,
                 range   = (voltage / factor) * 100;    // Using 3.3V; will differ for 5V
             // console.log("Sensor 1: " + range.toFixed(1) + "%" + " (" + voltage.toFixed(4) + ")");
-            m1 = voltage.toFixed(3);
+            m1 = voltage;
         });
     }, 1500);
 });
@@ -49,7 +51,7 @@ var moistureSensor2 = mcpadc.open(2, {speedHz: 20000}, function (err) {
             var voltage = reading.value,
                 range   = (voltage / factor) * 100;
             // console.log("Sensor 2: " + range.toFixed(1) + "%" + " (" + voltage.toFixed(4) + ")");
-            m2 = voltage.toFixed(3);
+            m2 = voltage;
         });
     }, 1500);
 });
@@ -63,7 +65,7 @@ var moistureSensor3 = mcpadc.open(3, {speedHz: 20000}, function (err) {
             var voltage = reading.value,
                 range   = (voltage / factor) * 100;
             // console.log("Sensor 3: " + range.toFixed(1) + "%" + " (" + voltage.toFixed(4) + ")");
-            m3 = voltage.toFixed(3);
+            m3 = voltage;
         });
     }, 1500);
 });
@@ -77,7 +79,7 @@ var moistureSensor4 = mcpadc.open(4, {speedHz: 20000}, function (err) {
             var voltage = reading.value,
                 range   = (voltage / factor) * 100;
             // console.log("Sensor 4: " + range.toFixed(1) + "%" + " (" + voltage.toFixed(4) + ")");
-            m4 = voltage.toFixed(3);
+            m4 = voltage;
         });
     }, 1500);
 });
@@ -91,10 +93,12 @@ var moistureSensor5 = mcpadc.open(5, {speedHz: 20000}, function (err) {
             var voltage = reading.value,
                 range   = (voltage / factor) * 100;
             // console.log("Sensor 5: " + range.toFixed(1) + "%" + " (" + voltage.toFixed(4) + ")");
-            m5 = voltage.toFixed(3);
+            m5 = voltage;
         });
     }, 1500);
 });
+
+console.log("Interval: 3 seconds\r\n");
 
 setInterval(function() {
     avg = (m1 + m2 + m3 + m4 + m5) / 5;
