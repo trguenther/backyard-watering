@@ -1,12 +1,13 @@
 const factor = 0.8; // Using 3.3V. This will differ for 5V
 
 var mcpadc = require('mcp-spi-adc');
-var t1 = 0.0,
-    m1 = 0.0,
-    m2 = 0.0,
-    m3 = 0.0,
-    m4 = 0.0,
-    m5 = 0.0;
+var t1  = 0.0,
+    m1  = 0.0,
+    m2  = 0.0,
+    m3  = 0.0,
+    m4  = 0.0,
+    m5  = 0.0,
+    avg = 0.0;
 
 var tempSensor = mcpadc.open(0, {speedHz: 20000}, function (err) {
     if (err) throw err;
@@ -33,7 +34,7 @@ var moistureSensor1 = mcpadc.open(1, {speedHz: 20000}, function (err) {
             var voltage = reading.value,
                 range   = (voltage / factor) * 100;    // Using 3.3V; will differ for 5V
             // console.log("Sensor 1: " + range.toFixed(1) + "%" + " (" + voltage.toFixed(4) + ")");
-            m1 = range.toFixed(1);
+            m1 = voltage.toFixed(3);
         });
     }, 1500);
 });
@@ -48,7 +49,7 @@ var moistureSensor2 = mcpadc.open(2, {speedHz: 20000}, function (err) {
             var voltage = reading.value,
                 range   = (voltage / factor) * 100;
             // console.log("Sensor 2: " + range.toFixed(1) + "%" + " (" + voltage.toFixed(4) + ")");
-            m2 = range.toFixed(1);
+            m2 = voltage.toFixed(3);
         });
     }, 1500);
 });
@@ -62,7 +63,7 @@ var moistureSensor3 = mcpadc.open(3, {speedHz: 20000}, function (err) {
             var voltage = reading.value,
                 range   = (voltage / factor) * 100;
             // console.log("Sensor 3: " + range.toFixed(1) + "%" + " (" + voltage.toFixed(4) + ")");
-            m3 = range.toFixed(1);
+            m3 = voltage.toFixed(3);
         });
     }, 1500);
 });
@@ -76,7 +77,7 @@ var moistureSensor4 = mcpadc.open(4, {speedHz: 20000}, function (err) {
             var voltage = reading.value,
                 range   = (voltage / factor) * 100;
             // console.log("Sensor 4: " + range.toFixed(1) + "%" + " (" + voltage.toFixed(4) + ")");
-            m4 = range.toFixed(1);
+            m4 = voltage.toFixed(3);
         });
     }, 1500);
 });
@@ -90,11 +91,12 @@ var moistureSensor5 = mcpadc.open(5, {speedHz: 20000}, function (err) {
             var voltage = reading.value,
                 range   = (voltage / factor) * 100;
             // console.log("Sensor 5: " + range.toFixed(1) + "%" + " (" + voltage.toFixed(4) + ")");
-            m5 = range.toFixed(1);
+            m5 = voltage.toFixed(3);
         });
     }, 1500);
 });
 
 setInterval(function() {
-    console.log("Ambient temperature: " + t1 + " F\nSensor 1: " + m1 + "%\nSensor 2: " + m2 + "%\nSensor 3: " + m3 + "%\nSensor 4: " + m4 + "%\nSensor 5: " + m5 + "%\r\n");
+    avg = (m1 + m2 + m3 + m4 + m5) / 5;
+    console.log("Ambient temperature: " + t1 + " F\nAverage soil moisture reading: " + avg.toFixed(3) + "V\r\n");
 }, 3000);
