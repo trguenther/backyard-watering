@@ -87,7 +87,7 @@ var moistureSensor4 = mcpadc.open(4, {speedHz: 20000}, function (err) {
     setInterval(function () {
         moistureSensor4.read(function (err, reading) {
             if (err) throw err;
-            m4 = reading.value,
+            m4 = reading.value;
         });
     }, 15000);
 });
