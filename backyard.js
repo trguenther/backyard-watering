@@ -9,6 +9,28 @@ var t1  = 0.0,
     m5  = 0.0,
     avg = 0.0;
 
+function getDateTime() {
+
+    var date = new Date();
+
+    var hour = date.getHours();
+    hour = (hour < 10 ? "0" : "") + hour;
+
+    var min  = date.getMinutes();
+    min = (min < 10 ? "0" : "") + min;
+
+    var year = date.getFullYear();
+
+    var month = date.getMonth() + 1;
+    month = (month < 10 ? "0" : "") + month;
+
+    var day  = date.getDate();
+    day = (day < 10 ? "0" : "") + day;
+
+    return hour + ":" + min + " on " + month + "/" + day + "/" + year;
+
+}
+
 var tempSensor = mcpadc.open(0, {speedHz: 20000}, function (err) {
     if (err) throw err;
 
@@ -18,11 +40,9 @@ var tempSensor = mcpadc.open(0, {speedHz: 20000}, function (err) {
             var voltage = reading.value,
                 degC    = (reading.value * 3.3 - 0.5) * 100,
                 degF    = degC * (9 / 5) + 32;
-
-            // console.log("Ambient temperature " + degF.toFixed(2) + " F  (" + voltage.toFixed(4) + " V)");
             t1 = degF.toFixed(1);
         });
-    }, 1500);
+    }, 15000);
 });
 
 var moistureSensor1 = mcpadc.open(1, {speedHz: 20000}, function (err) {
@@ -31,12 +51,9 @@ var moistureSensor1 = mcpadc.open(1, {speedHz: 20000}, function (err) {
     setInterval(function () {
         moistureSensor1.read(function (err, reading) {
             if (err) throw err;
-            var voltage = reading.value,
-                range   = (voltage / factor) * 100;    // Using 3.3V; will differ for 5V
-            // console.log("Sensor 1: " + range.toFixed(1) + "%" + " (" + voltage.toFixed(4) + ")");
-            m1 = voltage;
+            m1 = reading.value;
         });
-    }, 1500);
+    }, 15000);
 });
 
 
@@ -46,12 +63,9 @@ var moistureSensor2 = mcpadc.open(2, {speedHz: 20000}, function (err) {
     setInterval(function () {
         moistureSensor2.read(function (err, reading) {
             if (err) throw err;
-            var voltage = reading.value,
-                range   = (voltage / factor) * 100;
-            // console.log("Sensor 2: " + range.toFixed(1) + "%" + " (" + voltage.toFixed(4) + ")");
-            m2 = voltage;
+            m2 = reading.value;
         });
-    }, 1500);
+    }, 15000);
 });
 
 /* Disable sensor 3: no plant / no drip line nearby: soil will be very dry, causing skewed average
@@ -61,12 +75,9 @@ var moistureSensor3 = mcpadc.open(3, {speedHz: 20000}, function (err) {
     setInterval(function () {
         moistureSensor3.read(function (err, reading) {
             if (err) throw err;
-            var voltage = reading.value,
-                range   = (voltage / factor) * 100;
-            // console.log("Sensor 3: " + range.toFixed(1) + "%" + " (" + voltage.toFixed(4) + ")");
-            m3 = voltage;
+            m3 = reading.value;
         });
-    }, 1500);
+    }, 15000);
 });
 */
 
@@ -76,12 +87,9 @@ var moistureSensor4 = mcpadc.open(4, {speedHz: 20000}, function (err) {
     setInterval(function () {
         moistureSensor4.read(function (err, reading) {
             if (err) throw err;
-            var voltage = reading.value,
-                range   = (voltage / factor) * 100;
-            // console.log("Sensor 4: " + range.toFixed(1) + "%" + " (" + voltage.toFixed(4) + ")");
-            m4 = voltage;
+            m4 = reading.value,
         });
-    }, 1500);
+    }, 15000);
 });
 
 var moistureSensor5 = mcpadc.open(5, {speedHz: 20000}, function (err) {
@@ -90,18 +98,16 @@ var moistureSensor5 = mcpadc.open(5, {speedHz: 20000}, function (err) {
     setInterval(function () {
         moistureSensor5.read(function (err, reading) {
             if (err) throw err;
-            var voltage = reading.value,
-                range   = (voltage / factor) * 100;
-            // console.log("Sensor 5: " + range.toFixed(1) + "%" + " (" + voltage.toFixed(4) + ")");
-            m5 = voltage;
+            m5 = reading.value;
         });
-    }, 1500);
+    }, 15000);
 });
 
-console.log("Interval: 3 seconds\r\n");
+console.log("Backyard Watering Monitoring Running\r\nSensor 3 (ch. 3) deactivated.\r\nTaking readings every 15 minutes.\r\n");
 
 setInterval(function() {
-    // avg = (m1 + m2 + m3 + m4 + m5) / 5; // Average of all five sensors
-    avg = (m1 + m2 + m4 + m5) / 4;
-    console.log("Ambient temperature: " + t1 + " F\nAverage soil moisture reading: " + avg.toFixed(3) + "V\r\n");
-}, 3000);
+    // var avg = (m1 + m2 + m3 + m4 + m5) / 5; // Average of all five sensors
+    var avg = (m1 + m2 + m4 + m5) / 4;
+    var curTime = getDateTime();
+    console.log("At " + curTime + ":\r\nAmbient temperature: " + t1 + " deg F\nAverage soil moisture reading: " + avg.toFixed(3) + "V\r\n");
+}, 900000);
