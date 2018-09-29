@@ -57,6 +57,7 @@ var moistureSensor1 = mcpadc.open(1, {speedHz: 20000}, function (err) {
 });
 
 
+/* Disable sensor 2: no plant / no drip line nearby: soil will be very dry, causing skewed average
 var moistureSensor2 = mcpadc.open(2, {speedHz: 20000}, function (err) {
     if (err) throw err;
 
@@ -67,8 +68,8 @@ var moistureSensor2 = mcpadc.open(2, {speedHz: 20000}, function (err) {
         });
     }, 15000);
 });
+*/
 
-/* Disable sensor 3: no plant / no drip line nearby: soil will be very dry, causing skewed average
 var moistureSensor3 = mcpadc.open(3, {speedHz: 20000}, function (err) {
     if (err) throw err;
 
@@ -79,7 +80,6 @@ var moistureSensor3 = mcpadc.open(3, {speedHz: 20000}, function (err) {
         });
     }, 15000);
 });
-*/
 
 var moistureSensor4 = mcpadc.open(4, {speedHz: 20000}, function (err) {
     if (err) throw err;
