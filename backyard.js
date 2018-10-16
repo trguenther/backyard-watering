@@ -57,7 +57,7 @@ var moistureSensor1 = mcpadc.open(1, {speedHz: 20000}, function (err) {
 });
 
 
-/* Disable sensor 2: no plant / no drip line nearby: soil will be very dry, causing skewed average
+// No plant / no drip line nearby: soil will be very dry, causing skewed average
 var moistureSensor2 = mcpadc.open(2, {speedHz: 20000}, function (err) {
     if (err) throw err;
 
@@ -68,7 +68,7 @@ var moistureSensor2 = mcpadc.open(2, {speedHz: 20000}, function (err) {
         });
     }, 15000);
 });
-*/
+
 
 var moistureSensor3 = mcpadc.open(3, {speedHz: 20000}, function (err) {
     if (err) throw err;
@@ -109,5 +109,5 @@ setInterval(function() {
     // var avg = (m1 + m2 + m3 + m4 + m5) / 5; // Average of all five sensors
     var avg = (m1 + m2 + m4 + m5) / 4;
     var curTime = getDateTime();
-    console.log("At " + curTime + ":\r\nAmbient temperature: " + t1 + " deg F\nAverage soil moisture reading: " + avg.toFixed(3) + "V\r\n");
-}, 900000);
+    console.log("At " + curTime + ":\r\nAmbient temperature: " + t1 + " deg F\nAverage soil moisture reading: " + avg.toFixed(3) + "V\nSensor 1: " + m1.toFixed(3) + "V\nSensor 2: " + m2.toFixed(3) + "V\nSensor 3: " + m3.toFixed(3) + "V\nSensor 4: " + m4.toFixed(3) + "V\nSensor 5: " + m5.toFixed(3) + "\r\n");
+}, 300000);

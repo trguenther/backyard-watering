@@ -1,6 +1,6 @@
 var mcpadc = require('mcp-spi-adc');
 
-var moistureSensor = mcpadc.open(3, {speedHz: 20000}, function (err) {
+var moistureSensor = mcpadc.open(2, {speedHz: 20000}, function (err) {
     if (err) throw err;
 
     var moistureValues = [];
