@@ -103,7 +103,7 @@ var moistureSensor5 = mcpadc.open(5, {speedHz: 20000}, function (err) {
     }, 15000);
 });
 
-console.log("Backyard Watering Monitoring Running\r\nSensor 2 (ch. 2) deactivated.\r\nTaking readings every 15 minutes.\r\n");
+console.log("Monitoring backyard watering system.\r\nTaking readings every 5 minutes.\r\n");
 
 setInterval(function() {
     // var avg = (m1 + m2 + m3 + m4 + m5) / 5; // Average of all five sensors
