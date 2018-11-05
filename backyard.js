@@ -103,11 +103,12 @@ var moistureSensor5 = mcpadc.open(5, {speedHz: 20000}, function (err) {
     }, 15000);
 });
 
-console.log("Monitoring backyard watering system.\r\nTaking readings every 5 minutes.\r\n");
+var curTime = getDateTime();
+
+console.log("Monitoring backyard watering system.\r\nStarted at " + curTime + "\r\nTaking readings every 5 minutes.\r\n");
 
 setInterval(function() {
-    // var avg = (m1 + m2 + m3 + m4 + m5) / 5; // Average of all five sensors
-    var avg = (m1 + m2 + m4 + m5) / 4;
-    var curTime = getDateTime();
+    var avg = (m1 + m2 + m3 + m4 + m5) / 5; // Average of all five sensors
+    curTime = getDateTime();
     console.log("At " + curTime + ":\r\nAmbient temperature: " + t1 + " deg F\nAverage soil moisture reading: " + avg.toFixed(3) + "V\nSensor 1: " + m1.toFixed(3) + "V\nSensor 2: " + m2.toFixed(3) + "V\nSensor 3: " + m3.toFixed(3) + "V\nSensor 4: " + m4.toFixed(3) + "V\nSensor 5: " + m5.toFixed(3) + "\r\n");
 }, 300000);
