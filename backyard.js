@@ -113,7 +113,11 @@ function readoutToConsole() {
 
 console.log("Monitoring backyard watering system.\r\nStarted at " + curTime + "\r\nTaking readings every 5 minutes.\r\n");
 
-readoutToConsole();
+// Display some readings without having to wait for the first interval (5 minutes)
+// but still allow the sensors to be read (15-second intervals)
+setTimeout(function() {
+    readoutToConsole();
+}, 20000);
 
 setInterval(function() {
     readoutToConsole();
