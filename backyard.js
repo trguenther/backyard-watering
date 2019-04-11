@@ -81,6 +81,8 @@ var moistureSensor5 = mcpadc.open(5, {speedHz: 20000}, function (err) {
     }, 15000);
 });
 
+var curTime = getDateTime();
+
 function getDateTime() {
 
     var date = new Date();
@@ -103,7 +105,6 @@ function getDateTime() {
 }
 
 function readoutToConsole() {
-    var curTime = getDateTime();
     var avg   = (m1 + m2 + m3 + m4 + m5) / 5; // Average of all five sensors
     var range = (avg / 0.8) * 100;
 
