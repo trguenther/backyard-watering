@@ -9,28 +9,6 @@ var t1  = 0.0,
     m5  = 0.0,
     avg = 0.0;
 
-function getDateTime() {
-
-    var date = new Date();
-
-    var hour = date.getHours();
-    hour = (hour < 10 ? "0" : "") + hour;
-
-    var min  = date.getMinutes();
-    min = (min < 10 ? "0" : "") + min;
-
-    var year = date.getFullYear();
-
-    var month = date.getMonth() + 1;
-    month = (month < 10 ? "0" : "") + month;
-
-    var day  = date.getDate();
-    day = (day < 10 ? "0" : "") + day;
-
-    return hour + ":" + min + " on " + month + "/" + day + "/" + year;
-
-}
-
 var tempSensor = mcpadc.open(0, {speedHz: 20000}, function (err) {
     if (err) throw err;
 
@@ -103,13 +81,38 @@ var moistureSensor5 = mcpadc.open(5, {speedHz: 20000}, function (err) {
     }, 15000);
 });
 
-var curTime = getDateTime();
+function getDateTime() {
 
-console.log("Monitoring backyard watering system.\r\nStarted at " + curTime + "\r\nTaking readings every 5 minutes.\r\n");
+    var date = new Date();
 
-setInterval(function() {
-    var avg   = (m1 + m2 + m3 + m4 + m5) / 5; // Average of all five sensors
+    var hour = date.getHours();
+    hour = (hour < 10 ? "0" : "") + hour;
+
+    var min  = date.getMinutes();
+    min = (min < 10 ? "0" : "") + min;
+
+    var year = date.getFullYear();
+
+    var month = date.getMonth() + 1;
+    month = (month < 10 ? "0" : "") + month;
+
+    var day  = date.getDate();
+    day = (day < 10 ? "0" : "") + day;
+
+    return hour + ":" + min + " on " + month + "/" + day + "/" + year;
+}
+
+function readoutToConsole() {
+var avg   = (m1 + m2 + m3 + m4 + m5) / 5; // Average of all five sensors
     var range = (avg / 0.8) * 100;
     curTime = getDateTime();
     console.log("At " + curTime + ":\r\nAmbient temperature: " + t1 + " deg F\nAverage soil moisture reading: " + avg.toFixed(3) + "V (" + range.toFixed(1) + "%)\nSensor 1: " + m1.toFixed(3) + "V\nSensor 2: " + m2.toFixed(3) + "V\nSensor 3: " + m3.toFixed(3) + "V\nSensor 4: " + m4.toFixed(3) + "V\nSensor 5: " + m5.toFixed(3) + "V\r\n");
+}
+
+console.log("Monitoring backyard watering system.\r\nStarted at " + curTime + "\r\nTaking readings every 5 minutes.\r\n");
+
+readoutToConsole();
+
+setInterval(function() {
+    readoutToConsole();
 }, 300000);
