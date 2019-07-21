@@ -20,7 +20,7 @@ var tempSensor = mcpadc.open(0, {speedHz: 20000}, function (err) {
                 degF    = degC * (9 / 5) + 32;
             t1 = degF.toFixed(1);
         });
-    }, 15000);
+    }, 1000);
 });
 
 var moistureSensor1 = mcpadc.open(1, {speedHz: 20000}, function (err) {
@@ -31,7 +31,7 @@ var moistureSensor1 = mcpadc.open(1, {speedHz: 20000}, function (err) {
             if (err) throw err;
             m1 = reading.value;
         });
-    }, 15000);
+    }, 1000);
 });
 
 
@@ -44,7 +44,7 @@ var moistureSensor2 = mcpadc.open(2, {speedHz: 20000}, function (err) {
             if (err) throw err;
             m2 = reading.value;
         });
-    }, 15000);
+    }, 1000);
 });
 
 
@@ -56,7 +56,7 @@ var moistureSensor3 = mcpadc.open(3, {speedHz: 20000}, function (err) {
             if (err) throw err;
             m3 = reading.value;
         });
-    }, 15000);
+    }, 1000);
 });
 
 var moistureSensor4 = mcpadc.open(4, {speedHz: 20000}, function (err) {
@@ -67,7 +67,7 @@ var moistureSensor4 = mcpadc.open(4, {speedHz: 20000}, function (err) {
             if (err) throw err;
             m4 = reading.value;
         });
-    }, 15000);
+    }, 1000);
 });
 
 var moistureSensor5 = mcpadc.open(5, {speedHz: 20000}, function (err) {
@@ -78,7 +78,7 @@ var moistureSensor5 = mcpadc.open(5, {speedHz: 20000}, function (err) {
             if (err) throw err;
             m5 = reading.value;
         });
-    }, 15000);
+    }, 1000);
 });
 
 
