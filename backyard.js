@@ -119,7 +119,7 @@ console.log("Monitoring backyard watering system.\r\nStarted at " + curTime + "\
 // but still allow the sensors to be read (15-second intervals)
 setTimeout(function() {
     readoutToConsole();
-}, 1000);
+}, 5000);
 
 setInterval(function() {
     readoutToConsole();
