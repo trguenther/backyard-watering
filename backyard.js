@@ -111,6 +111,8 @@ function readoutToConsole() {
     console.log("At " + curTime + ":\r\nAmbient temperature: " + t1 + " deg F\nAverage soil moisture reading: " + avg.toFixed(3) + "V (" + range.toFixed(1) + "%)\nSensor 1: " + m1.toFixed(3) + "V\nSensor 2: " + m2.toFixed(3) + "V\nSensor 3: " + m3.toFixed(3) + "V\nSensor 4: " + m4.toFixed(3) + "V\nSensor 5: " + m5.toFixed(3) + "V\r\n");
 }
 
+
+var curTime = getDateTime();
 console.log("Monitoring backyard watering system.\r\nStarted at " + curTime + "\r\nTaking readings every 5 minutes.\r\n");
 
 // Display some readings without having to wait for the first interval (5 minutes)
