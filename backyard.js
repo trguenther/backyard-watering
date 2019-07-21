@@ -81,7 +81,6 @@ var moistureSensor5 = mcpadc.open(5, {speedHz: 20000}, function (err) {
     }, 15000);
 });
 
-var curTime = getDateTime();
 
 function getDateTime() {
 
@@ -107,6 +106,7 @@ function getDateTime() {
 function readoutToConsole() {
     var avg   = (m1 + m2 + m3 + m4 + m5) / 5; // Average of all five sensors
     var range = (avg / 0.8) * 100;
+    var curTime = getDateTime();
 
     console.log("At " + curTime + ":\r\nAmbient temperature: " + t1 + " deg F\nAverage soil moisture reading: " + avg.toFixed(3) + "V (" + range.toFixed(1) + "%)\nSensor 1: " + m1.toFixed(3) + "V\nSensor 2: " + m2.toFixed(3) + "V\nSensor 3: " + m3.toFixed(3) + "V\nSensor 4: " + m4.toFixed(3) + "V\nSensor 5: " + m5.toFixed(3) + "V\r\n");
 }
@@ -117,7 +117,7 @@ console.log("Monitoring backyard watering system.\r\nStarted at " + curTime + "\
 // but still allow the sensors to be read (15-second intervals)
 setTimeout(function() {
     readoutToConsole();
-}, 20000);
+}, 1000);
 
 setInterval(function() {
     readoutToConsole();
