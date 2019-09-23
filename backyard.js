@@ -105,15 +105,32 @@ function getDateTime() {
 
 function getPercentageFromReading(value) {
     var percentage = (value / 0.8) * 100;
-    return percentage;
+    return percentage.toFixed(1);
 }
 
 function readoutToConsole() {
-    var avg   = (m1 + m2 + m3 + m4 + m5) / 5; // Average of all five sensors
-    var range = getPercentageFromReading(avg);
+    // Clean up some numbers for display
+    // f : "fixed"
+    // p : "percent"
+    var m1f = m1.toFixed(3);
+    var m1p = getPercentageFromReading(m1f);
+    var m2f = m2.toFixed(3);
+    var m2p = getPercentageFromReading(m2f);
+    var m3f = m3.toFixed(3);
+    var m3p = getPercentageFromReading(m3f);
+    var m4f = m4.toFixed(3);
+    var m4p = getPercentageFromReading(m4f);
+    var m5f = m5.toFixed(3);
+    var m5p = getPercentageFromReading(m5f);
+
+    // Get the average of the five moisture sensors
+    var avgf   = (m1 + m2 + m3 + m4 + m5) / 5;
+        avgf   = avg.toFixed(3);
+    var avgp = getPercentageFromReading(avg);
+
     var curTime = getDateTime();
 
-    console.log("At " + curTime + ":\r\nAmbient temperature: " + t1 + " deg F\nAverage soil moisture reading: " + avg.toFixed(3) + "V (" + range.toFixed(1) + "%)\nSensor 1: " + m1.toFixed(3) + "V\nSensor 2: " + m2.toFixed(3) + "V\nSensor 3: " + m3.toFixed(3) + "V\nSensor 4: " + m4.toFixed(3) + "V\nSensor 5: " + m5.toFixed(3) + "V\r\n");
+    console.log("At " + curTime + ":\r\nAmbient temperature: " + t1 + " deg F\nAverage soil moisture reading: " + avgf + "V (" + avgp + "%)\nSensor 1: " + m1f + "V (" + m1p + "%)\nSensor 2: " + m2f + "V (" + m2p +"%)\nSensor 3: " + m3f + "V (" + m3p +"%)\nSensor 4: " + m4f + "V (" + m4p +"%)\nSensor 5: " + m5f + "V (" + m5p +"%)\r\n");
 }
 
 
