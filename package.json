@@ -1,10 +1,10 @@
 {
   "name": "backyard-watering",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "My DIY backyard smart-watering project",
   "main": "backyard.js",
   "scripts": {
-    "test": "echo \"No test specified.\" && exit 1"
+    "test": "echo \"No test specified.\" && exit 0"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/trguenther/backyard-watering#readme",
   "dependencies": {
-    "mcp-spi-adc": "^2.0.3",
-    "pigpio": "^1.1.2"
+    "mcp-spi-adc": "~3.0",
+    "pigpio": "~2.0"
   }
 }
