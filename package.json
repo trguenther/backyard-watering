@@ -1,10 +1,10 @@
 {
   "name": "backyard-watering",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "My DIY backyard smart-watering project",
   "main": "backyard.js",
   "scripts": {
-    "test": "echo \"No test specified.\" && exit 1"
+    "test": "echo \"No test specified.\" && exit 0"
   },
   "repository": {
     "type": "git",
